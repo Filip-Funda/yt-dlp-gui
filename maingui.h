@@ -65,6 +65,8 @@ private:
 
     QString getSelectedFormat() const;
 
+    QStringList getAdvancedMediaInfo() const;
+
     void addArguments(const QString & url, const QString & directoryPath);
 
     void setLabelColor(QLabel * label, QColor color);

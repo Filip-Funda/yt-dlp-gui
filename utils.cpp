@@ -101,6 +101,31 @@ QString MainGUI::getSelectedFormat() const {
     }
 }
 
+QStringList MainGUI::getAdvancedMediaInfo() const {
+    QStringList mediaInfo;
+
+    // Audio tab
+    if (ui->advancedFormatTabs->currentIndex() == 0) {
+        mediaInfo << (ui->audioContainerDropdown->currentText());
+        mediaInfo << (ui->audioAudioCodecDropdown->currentText());
+    }
+    // Video tab
+    else {
+        mediaInfo << (ui->videoContainerDropdown->currentText());
+        mediaInfo << (ui->videoAudioCodecDropdown->currentText());
+
+        QString videoCodec =ui->videoVideoCodecDropdown->currentText();
+        int index = videoCodec.indexOf(" (");
+        if (index != -1) {
+            videoCodec.truncate(index);
+        }
+
+        mediaInfo << videoCodec;
+    }
+
+    return mediaInfo;
+}
+
 void MainGUI::addArguments(const QString & url, const QString & directoryPath) {
     args // ----- GENERAL SETTINGS -----
         << "--newline"
@@ -162,6 +187,26 @@ void MainGUI::addArguments(const QString & url, const QString & directoryPath) {
         }
     } else {
         // ADVANCED tab is selected, AUDIO and VIDEO
+        QStringList mediaInfo = getAdvancedMediaInfo();
+        QString container = mediaInfo[0].toLower();
+        QString audioCodec = mediaInfo[1];
+
+        if (ui->advancedFormatTabs->currentIndex() == 0) {
+            // AUDIO is selected
+            args << "-x";
+            args << "--audio-format" << container;
+
+        } else {
+            // VIDEO is selected
+            QString videoCodec = mediaInfo[2];
+            args << "--merge-output-format" << container;
+        }
+
+        if (ui->advancedQuantityTabs->currentIndex() == 0) {
+            // SINGLE download is selected
+        } else {
+            // PLAYLIST download is selected
+        }
     }
 
     args << url;
