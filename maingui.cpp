@@ -1,4 +1,5 @@
 #include "maingui.h"
+#include "template_highlighter.h"
 #include "./ui_maingui.h"
 #include <QFileDialog>
 #include <QDir>
@@ -72,6 +73,8 @@ MainGUI::MainGUI(QWidget *parent)
     });
 
     showAvailableCodecs();
+
+    FilenameHighlighter * highlighter = new FilenameHighlighter(ui->advancedFileNameInput->document());
 
     // automatically detect binaries
     detectBinaries();
@@ -163,11 +166,11 @@ void MainGUI::on_downloadButton_clicked() {
 
         ui->status->setText(tr("Failed to start download!"));
         ui->downloadButton->setEnabled(true);
-        ui->downloadButton->setCursor(Qt::PointingHandCursor);
+        //ui->downloadButton->setCursor(Qt::PointingHandCursor);
 
         ui->downloadButton->setText(tr("Download"));
         ui->directoryButton->setEnabled(true);
-        ui->directoryButton->setCursor(Qt::PointingHandCursor);
+        //ui->directoryButton->setCursor(Qt::PointingHandCursor);
         return;
     }
 
@@ -261,9 +264,9 @@ void MainGUI::updateUIColors(bool isDark) {
 
 void MainGUI::setButtonsEnabled(bool enabled) {
     ui->downloadButton->setEnabled(enabled);
-    ui->downloadButton->setCursor(enabled ? Qt::PointingHandCursor : Qt::ArrowCursor);
+    //ui->downloadButton->setCursor(enabled ? Qt::PointingHandCursor : Qt::ArrowCursor);
     ui->directoryButton->setEnabled(enabled);
-    ui->directoryButton->setCursor(enabled ? Qt::PointingHandCursor : Qt::ArrowCursor);
+    //ui->directoryButton->setCursor(enabled ? Qt::PointingHandCursor : Qt::ArrowCursor);
 }
 
 void MainGUI::showAvailableCodecs() {
@@ -276,11 +279,11 @@ void MainGUI::showAvailableCodecs() {
 
             QString currentContainer = ui->audioContainerDropdown->currentText();
             if (currentContainer == "M4A") {
-                ui->audioAudioCodecDropdown->addItems({"aac", "alac"});
+                ui->audioAudioCodecDropdown->addItems({"mp4a", "aac", "alac"});
             } else if (currentContainer == "WAV") {
-                ui->audioAudioCodecDropdown->addItems({"pcm", "mp3", "flac"});
+                ui->audioAudioCodecDropdown->addItems({"pcm"});
             } else if (currentContainer == "OGG") {
-                ui->audioAudioCodecDropdown->addItems({"opus", "vorbis", "flac"});
+                ui->audioAudioCodecDropdown->addItems({"opus", "vorbis"});
             } else {
                 ui->audioAudioCodecDropdown->addItems({currentContainer.toLower()});
                 ui->audioAudioCodecDropdown->setEnabled(false);
@@ -315,4 +318,33 @@ void MainGUI::showAvailableCodecs() {
             }
         }
     }
+}
+
+void MainGUI::on_addTitleButton_clicked() {
+    ui->advancedFileNameInput->insertPlainText("%(title)s");
+    ui->advancedFileNameInput->setFocus();
+}
+
+
+void MainGUI::on_addUploaderButton_clicked() {
+    ui->advancedFileNameInput->insertPlainText("%(uploader)s");
+    ui->advancedFileNameInput->setFocus();
+}
+
+
+void MainGUI::on_addUploadDateButton_clicked() {
+    ui->advancedFileNameInput->insertPlainText("%(upload_date)s");
+    ui->advancedFileNameInput->setFocus();
+}
+
+
+void MainGUI::on_addResolutionButton_clicked() {
+    ui->advancedFileNameInput->insertPlainText("%(resolution)s");
+    ui->advancedFileNameInput->setFocus();
+}
+
+
+void MainGUI::on_addExtensionButton_clicked() {
+    ui->advancedFileNameInput->insertPlainText("%(ext)s");
+    ui->advancedFileNameInput->setFocus();
 }

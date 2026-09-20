@@ -42,6 +42,16 @@ private slots:
 
     void on_detectButton_clicked();
 
+    void on_addTitleButton_clicked();
+
+    void on_addUploaderButton_clicked();
+
+    void on_addUploadDateButton_clicked();
+
+    void on_addResolutionButton_clicked();
+
+    void on_addExtensionButton_clicked();
+
 private:
     Ui::MainGUI *ui;
     QProcess *process;
@@ -49,6 +59,7 @@ private:
 
     QString ytdlpPath;
     QString ffmpegPath;
+    QString jsRuntimePath;
     QStringList args;
 
     static constexpr const char * RATE_LIMIT = "3M";

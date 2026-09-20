@@ -28,6 +28,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         utils.cpp
         language.cpp
+        template_highlighter.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET yt-dlp-gui APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -79,7 +80,6 @@ if(QT_VERSION_MAJOR EQUAL 6)
 endif()
 
 
-
 enable_testing()
 
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Test)
@@ -90,6 +90,7 @@ add_executable(yt-dlp-gui-tests
     maingui.cpp
     language.cpp
     maingui.ui
+    template_highlighter.h
 )
 
 target_link_libraries(yt-dlp-gui-tests PRIVATE

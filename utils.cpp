@@ -12,7 +12,7 @@ void MainGUI::detectBinaries(bool silent) {
 
     // find needed binaries, disable download if not found
     ytdlpPath = QStandardPaths::findExecutable("yt-dlp");
-    if (ytdlpPath.isEmpty()) {        
+    if (ytdlpPath.isEmpty()) {
         QStringList extraPaths;
 
 #if defined(Q_OS_MACOS)
@@ -30,7 +30,7 @@ void MainGUI::detectBinaries(bool silent) {
     }
 
     ffmpegPath = QStandardPaths::findExecutable("ffmpeg");
-    if (ffmpegPath.isEmpty()) {        
+    if (ffmpegPath.isEmpty()) {
         QStringList extraPaths;
 
 #if defined(Q_OS_MACOS)
@@ -46,6 +46,20 @@ void MainGUI::detectBinaries(bool silent) {
     if (!ffmpegPath.isEmpty()) {
         ffmpegFound = true;
     }
+
+    jsRuntimePath = QStandardPaths::findExecutable("node");
+    if (jsRuntimePath.isEmpty()) {
+        jsRuntimePath = QStandardPaths::findExecutable("deno");
+    }
+#if defined(Q_OS_MACOS)
+    if (jsRuntimePath.isEmpty()) {
+        QStringList extraPaths = {"/opt/homebrew/bin", "/usr/local/bin"};
+        jsRuntimePath = QStandardPaths::findExecutable("node", extraPaths);
+        if (jsRuntimePath.isEmpty()) {
+            jsRuntimePath = QStandardPaths::findExecutable("deno", extraPaths);
+        }
+    }
+#endif
 
     if (!ffmpegFound || !ytdlpFound) {
         if (!silent) {
@@ -112,10 +126,17 @@ QStringList MainGUI::getAdvancedMediaInfo() const {
     // Video tab
     else {
         mediaInfo << (ui->videoContainerDropdown->currentText());
-        mediaInfo << (ui->videoAudioCodecDropdown->currentText());
 
-        QString videoCodec =ui->videoVideoCodecDropdown->currentText();
-        int index = videoCodec.indexOf(" (");
+        QString audioCodec = ui->videoAudioCodecDropdown->currentText();
+        int index = audioCodec.indexOf(" (");
+        if (index != -1) {
+            audioCodec.truncate(index);
+        }
+
+        mediaInfo << audioCodec;
+
+        QString videoCodec = ui->videoVideoCodecDropdown->currentText();
+        index = videoCodec.indexOf(" (");
         if (index != -1) {
             videoCodec.truncate(index);
         }
@@ -141,6 +162,10 @@ void MainGUI::addArguments(const QString & url, const QString & directoryPath) {
         << "--ffmpeg-location" << ffmpegPath
         << "-P" << directoryPath;
 
+    if (!jsRuntimePath.isEmpty()) {
+        QString runtimeType = jsRuntimePath.contains("deno") ? "deno" : "node";
+        args << "--js-runtimes" << QString("%1:%2").arg(runtimeType, jsRuntimePath);
+    }
 
     if (ui->settingsTab->currentIndex() == 0) {
         // SIMPLE tab is selected, AUDIO and VIDEO
@@ -152,6 +177,7 @@ void MainGUI::addArguments(const QString & url, const QString & directoryPath) {
             if (format != "best") {
                 args << "--audio-format" << format;
             }
+            args << "-f" << "ba";
 
         } else {
             // VIDEO is selected
@@ -195,10 +221,17 @@ void MainGUI::addArguments(const QString & url, const QString & directoryPath) {
             // AUDIO is selected
             args << "-x";
             args << "--audio-format" << container;
+            args << "-f" << QString("ba[acodec*=%1]").arg(audioCodec.toLower());
 
         } else {
             // VIDEO is selected
             QString videoCodec = mediaInfo[2];
+
+            QStringList filters;
+            filters << QString("vcodec*=%1").arg(videoCodec.toLower());
+            filters << QString("acodec*=%1").arg(audioCodec.toLower());
+            args << "-f" << QString("bv*[%1]+ba").arg(filters.join("]["));
+
             args << "--merge-output-format" << container;
         }
 
