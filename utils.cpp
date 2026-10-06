@@ -237,6 +237,15 @@ void MainGUI::addArguments(const QString & url, const QString & directoryPath) {
 
         if (ui->advancedQuantityTabs->currentIndex() == 0) {
             // SINGLE download is selected
+            QString advancedFileName = ui->advancedFileNameInput->toPlainText();
+
+            if (advancedFileName.length() > 0) {
+
+                // Injection protection
+
+                args << "-o" << advancedFileName;
+            }
+
         } else {
             // PLAYLIST download is selected
         }

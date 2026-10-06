@@ -180,7 +180,7 @@
     <message>
         <location filename="maingui.ui" line="820"/>
         <source>Uploader</source>
-        <translation>Nahrávač</translation>
+        <translation>Autor videa</translation>
     </message>
     <message>
         <location filename="maingui.ui" line="827"/>

@@ -1,5 +1,4 @@
 #include "maingui.h"
-#include "template_highlighter.h"
 #include "./ui_maingui.h"
 #include <QFileDialog>
 #include <QDir>
@@ -14,6 +13,8 @@
 #include <QMessageBox>
 #include <QUrl>
 #include <QFile>
+#include <QKeyEvent>
+#include <QFontMetrics>
 
 MainGUI::MainGUI(QWidget *parent)
     : QMainWindow(parent)
@@ -74,10 +75,51 @@ MainGUI::MainGUI(QWidget *parent)
 
     showAvailableCodecs();
 
-    FilenameHighlighter * highlighter = new FilenameHighlighter(ui->advancedFileNameInput->document());
+    // install event filter so user cant create a new line
+    ui->advancedFileNameInput->installEventFilter(this);
+
+    highlighter = new FilenameHighlighter(ui->advancedFileNameInput->document());
 
     // automatically detect binaries
     detectBinaries();
+}
+
+bool MainGUI::eventFilter(QObject * obj, QEvent * event) {
+    if (event->type() == QEvent::KeyPress) {
+        QKeyEvent * keyEvent = static_cast<QKeyEvent *>(event);
+        if (keyEvent->key() == Qt::Key_Return || keyEvent->key() == Qt::Key_Enter) {
+            return true;
+        }
+
+        if (obj == ui->advancedFileNameInput) {
+            QString text = keyEvent->text();
+            if (!text.isEmpty()) {
+                static const QString forbiddenChars = "<>:\"/\\|?*";
+                for (int i = 0; i < text.length(); ++i) {
+                    if (forbiddenChars.contains(text.at(i))) {
+                        return true;
+                    }
+                }
+            }
+
+            int maxLen = 256;
+
+            if (ui->advancedFileNameInput->toPlainText().length() >= maxLen) {
+                if (keyEvent->key() != Qt::Key_Backspace &&
+                    keyEvent->key() != Qt::Key_Delete &&
+                    keyEvent->key() != Qt::Key_Left &&
+                    keyEvent->key() != Qt::Key_Right &&
+                    keyEvent->key() != Qt::Key_Up &&
+                    keyEvent->key() != Qt::Key_Down &&
+                    !keyEvent->modifiers().testFlag(Qt::ControlModifier))
+                {
+                    return true;
+                }
+            }
+        }
+    }
+
+    return QMainWindow::eventFilter(obj, event);
 }
 
 MainGUI::~MainGUI() {
@@ -85,6 +127,8 @@ MainGUI::~MainGUI() {
         process->kill();
         delete process;
     }
+
+    delete highlighter;
 
     delete ui;
 }
@@ -321,30 +365,40 @@ void MainGUI::showAvailableCodecs() {
 }
 
 void MainGUI::on_addTitleButton_clicked() {
-    ui->advancedFileNameInput->insertPlainText("%(title)s");
-    ui->advancedFileNameInput->setFocus();
+    if (ui->advancedFileNameInput->toPlainText().length() < 247) {
+        ui->advancedFileNameInput->insertPlainText("%(title)s");
+        ui->advancedFileNameInput->setFocus();
+    }
 }
 
 
 void MainGUI::on_addUploaderButton_clicked() {
-    ui->advancedFileNameInput->insertPlainText("%(uploader)s");
-    ui->advancedFileNameInput->setFocus();
+    if (ui->advancedFileNameInput->toPlainText().length() < 244) {
+        ui->advancedFileNameInput->insertPlainText("%(uploader)s");
+        ui->advancedFileNameInput->setFocus();
+    }
 }
 
 
 void MainGUI::on_addUploadDateButton_clicked() {
-    ui->advancedFileNameInput->insertPlainText("%(upload_date)s");
-    ui->advancedFileNameInput->setFocus();
+    if (ui->advancedFileNameInput->toPlainText().length() < 241) {
+        ui->advancedFileNameInput->insertPlainText("%(upload_date)s");
+        ui->advancedFileNameInput->setFocus();
+    }
 }
 
 
 void MainGUI::on_addResolutionButton_clicked() {
-    ui->advancedFileNameInput->insertPlainText("%(resolution)s");
-    ui->advancedFileNameInput->setFocus();
+    if (ui->advancedFileNameInput->toPlainText().length() < 242) {
+        ui->advancedFileNameInput->insertPlainText("%(resolution)s");
+        ui->advancedFileNameInput->setFocus();
+    }
 }
 
 
 void MainGUI::on_addExtensionButton_clicked() {
-    ui->advancedFileNameInput->insertPlainText("%(ext)s");
-    ui->advancedFileNameInput->setFocus();
+    if (ui->advancedFileNameInput->toPlainText().length() < 249) {
+        ui->advancedFileNameInput->insertPlainText("%(ext)s");
+        ui->advancedFileNameInput->setFocus();
+    }
 }

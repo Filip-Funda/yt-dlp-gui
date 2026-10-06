@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>645</width>
-    <height>747</height>
+    <width>652</width>
+    <height>769</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -846,6 +846,9 @@ QPushButton:hover {
               </item>
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="1,10,1">
+                <property name="spacing">
+                 <number>0</number>
+                </property>
                 <item>
                  <spacer name="horizontalSpacer_20">
                   <property name="orientation">
@@ -862,10 +865,40 @@ QPushButton:hover {
                 <item>
                  <widget class="QTextEdit" name="advancedFileNameInput">
                   <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Ignored">
+                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                     <horstretch>0</horstretch>
                     <verstretch>0</verstretch>
                    </sizepolicy>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>21</height>
+                   </size>
+                  </property>
+                  <property name="cursor" stdset="0">
+                   <cursorShape>IBeamCursor</cursorShape>
+                  </property>
+                  <property name="autoFillBackground">
+                   <bool>false</bool>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">QTextEdit {
+    background-color: palette(base);
+    color: palette(text);
+    border: 1px solid palette(mid);
+    border-radius: 3px;
+}
+
+QTextEdit:focus {
+    border: 1px solid palette(highlight);
+}</string>
+                  </property>
+                  <property name="inputMethodHints">
+                   <set>Qt::InputMethodHint::ImhNone</set>
+                  </property>
+                  <property name="frameShadow">
+                   <enum>QFrame::Shadow::Sunken</enum>
                   </property>
                   <property name="verticalScrollBarPolicy">
                    <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
@@ -1282,7 +1315,7 @@ QPushButton:hover {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>645</width>
+     <width>652</width>
      <height>33</height>
     </rect>
    </property>

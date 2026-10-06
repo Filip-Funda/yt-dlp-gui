@@ -6,6 +6,7 @@
 #include <QtWidgets/qlabel.h>
 #include <QTranslator>
 #include <QEvent>
+#include "template_highlighter.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -26,6 +27,8 @@ public:
 
 protected:
     void changeEvent(QEvent * event) override;
+
+    bool eventFilter(QObject *obj, QEvent *event) override;
 
 private slots:
     void on_directoryButton_clicked();
@@ -93,5 +96,7 @@ private:
     static bool isValidUrl(const QString & url);
 
     static bool isValidDirectory(const QString & path);
+
+    FilenameHighlighter * highlighter = nullptr;
 };
 #endif // MAINGUI_H
