@@ -55,6 +55,16 @@ private slots:
 
     void on_addExtensionButton_clicked();
 
+    void on_addPlaylistOrderButton_clicked();
+
+    void on_addPlaylistVideoTitleButton_clicked();
+
+    void on_addPlaylistPlaylistTitleButton_clicked();
+
+    void on_addPlaylistUploaderButton_clicked();
+
+    void on_addPlaylistExtensionButton_clicked();
+
 private:
     Ui::MainGUI *ui;
     QProcess *process;
@@ -97,6 +107,8 @@ private:
 
     static bool isValidDirectory(const QString & path);
 
-    FilenameHighlighter * highlighter = nullptr;
+    FilenameHighlighter * highlighterSingle = nullptr;
+
+    FilenameHighlighter * highlighterPlaylist = nullptr;
 };
 #endif // MAINGUI_H

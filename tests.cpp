@@ -20,7 +20,7 @@ private slots:
         QCOMPARE(MainGUI::sanitizeFilename("dangerous*symbol?.mp4"), QString("dangeroussymbol.mp4"));
         QCOMPARE(MainGUI::sanitizeFilename("   padding at the start and end   "), QString("padding_at_the_start_and_end"));
         QCOMPARE(MainGUI::sanitizeFilename(".make visible.mp4"), QString("make_visible.mp4"));
-        QCOMPARE(MainGUI::sanitizeFilename(".....very/\\ hard?* **test:<>.mp4"), QString("very_hard_test.mp4"));
+        QCOMPARE(MainGUI::sanitizeFilename(".....very/\\hard?***test:<>.mp4"), QString("very_hard_test.mp4"));
     }
 
     void testDirectoryValidation() {

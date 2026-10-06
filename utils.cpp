@@ -227,10 +227,10 @@ void MainGUI::addArguments(const QString & url, const QString & directoryPath) {
             // VIDEO is selected
             QString videoCodec = mediaInfo[2];
 
-            QStringList filters;
-            filters << QString("vcodec*=%1").arg(videoCodec.toLower());
-            filters << QString("acodec*=%1").arg(audioCodec.toLower());
-            args << "-f" << QString("bv*[%1]+ba").arg(filters.join("]["));
+            QString vFilter = QString("bv*[vcodec*=%1]").arg(videoCodec.toLower());
+            QString aFilter = QString("ba*[acodec*=%1]").arg(audioCodec.toLower());
+
+            args << "-f" << QString("%1+%2/b").arg(vFilter, aFilter);
 
             args << "--merge-output-format" << container;
         }
@@ -238,16 +238,44 @@ void MainGUI::addArguments(const QString & url, const QString & directoryPath) {
         if (ui->advancedQuantityTabs->currentIndex() == 0) {
             // SINGLE download is selected
             QString advancedFileName = ui->advancedFileNameInput->toPlainText();
+            QString cleanFileName = sanitizeFilename(advancedFileName);
 
-            if (advancedFileName.length() > 0) {
-
-                // Injection protection
-
-                args << "-o" << advancedFileName;
+            if (!cleanFileName.isEmpty()) {
+                args << "-o" << cleanFileName;
             }
 
         } else {
             // PLAYLIST download is selected
+
+            QString advancedFileName = ui->advancedPlaylistFileNameInput->toPlainText();
+            QString cleanFileName = sanitizeFilename(advancedFileName);
+
+
+            if (ui->ignoreAdvancedErrCheckBox->isChecked()) {
+                // ignore error if one video from playlist cannot be downloaded
+                args << "-i";
+            }
+
+            if (ui->createFolderCheckBox->isChecked()) {
+                // create a folder in destination and move in all downloaded media
+                // add %(playlist)s/ to the beginning to create a folder
+
+                if (cleanFileName.isEmpty()) {
+                    cleanFileName = "%(playlist)s/%(title)s.%(ext)s";
+                } else {
+                    cleanFileName = "%(playlist)s/" + cleanFileName;
+                }
+
+            } else if (cleanFileName.isEmpty()) {
+                cleanFileName = "%(title)s.%(ext)s";
+            }
+
+            if (!cleanFileName.isEmpty()) {
+                args << "-o" << cleanFileName;
+            }
+
+
+            args << "--yes-playlist";
         }
     }
 
@@ -257,20 +285,20 @@ void MainGUI::addArguments(const QString & url, const QString & directoryPath) {
 QString MainGUI::sanitizeFilename(const QString & filename) {
     QString clean = filename.trimmed();
 
-    clean.remove(QRegularExpression("[/\\\\]"));
-
-    clean.remove(QRegularExpression("[<>:\"|?*]"));
+    clean.remove(QRegularExpression("[/\\\\<>:\"|?*\\x00-\\x1F]"));
 
     clean.replace(QRegularExpression("\\.{2,}"), ".");
 
     clean.replace(" ", "_");
 
-    if (clean.startsWith(".")) {
-        clean.remove(0, 1);
-    }
+    clean.remove(QRegularExpression("^[-.]+"));
 
     if (clean.length() > 255) {
         clean = clean.left(255);
+    }
+
+    if (clean.isEmpty()) {
+        clean = "file";
     }
 
     return clean;

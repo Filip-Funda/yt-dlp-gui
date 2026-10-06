@@ -77,8 +77,11 @@ MainGUI::MainGUI(QWidget *parent)
 
     // install event filter so user cant create a new line
     ui->advancedFileNameInput->installEventFilter(this);
+    ui->advancedPlaylistFileNameInput->installEventFilter(this);
+    ui->fileNameInput->installEventFilter(this);
 
-    highlighter = new FilenameHighlighter(ui->advancedFileNameInput->document());
+    highlighterSingle = new FilenameHighlighter(ui->advancedFileNameInput->document(), true);
+    highlighterPlaylist = new FilenameHighlighter(ui->advancedPlaylistFileNameInput->document(), false);
 
     // automatically detect binaries
     detectBinaries();
@@ -91,7 +94,7 @@ bool MainGUI::eventFilter(QObject * obj, QEvent * event) {
             return true;
         }
 
-        if (obj == ui->advancedFileNameInput) {
+        if (obj == ui->advancedFileNameInput || obj == ui->fileNameInput) {
             QString text = keyEvent->text();
             if (!text.isEmpty()) {
                 static const QString forbiddenChars = "<>:\"/\\|?*";
@@ -128,7 +131,8 @@ MainGUI::~MainGUI() {
         delete process;
     }
 
-    delete highlighter;
+    delete highlighterSingle;
+    delete highlighterPlaylist;
 
     delete ui;
 }
@@ -402,3 +406,43 @@ void MainGUI::on_addExtensionButton_clicked() {
         ui->advancedFileNameInput->setFocus();
     }
 }
+
+void MainGUI::on_addPlaylistOrderButton_clicked() {
+    if (ui->advancedPlaylistFileNameInput->toPlainText().length() < 238) {
+        ui->advancedPlaylistFileNameInput->insertPlainText("%(playlist_index)s");
+        ui->advancedPlaylistFileNameInput->setFocus();
+    }
+}
+
+
+void MainGUI::on_addPlaylistVideoTitleButton_clicked() {
+    if (ui->advancedPlaylistFileNameInput->toPlainText().length() < 247) {
+        ui->advancedPlaylistFileNameInput->insertPlainText("%(title)s");
+        ui->advancedPlaylistFileNameInput->setFocus();
+    }
+}
+
+
+void MainGUI::on_addPlaylistPlaylistTitleButton_clicked() {
+    if (ui->advancedPlaylistFileNameInput->toPlainText().length() < 238) {
+        ui->advancedPlaylistFileNameInput->insertPlainText("%(playlist_title)s");
+        ui->advancedPlaylistFileNameInput->setFocus();
+    }
+}
+
+
+void MainGUI::on_addPlaylistUploaderButton_clicked() {
+    if (ui->advancedPlaylistFileNameInput->toPlainText().length() < 244) {
+        ui->advancedPlaylistFileNameInput->insertPlainText("%(uploader)s");
+        ui->advancedPlaylistFileNameInput->setFocus();
+    }
+}
+
+
+void MainGUI::on_addPlaylistExtensionButton_clicked() {
+    if (ui->advancedPlaylistFileNameInput->toPlainText().length() < 249) {
+        ui->advancedPlaylistFileNameInput->insertPlainText("%(ext)s");
+        ui->advancedPlaylistFileNameInput->setFocus();
+    }
+}
+

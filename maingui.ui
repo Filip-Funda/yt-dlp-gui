@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>652</width>
-    <height>769</height>
+    <width>705</width>
+    <height>818</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -759,7 +759,7 @@ QPushButton:hover {
         <item>
          <widget class="QTabWidget" name="advancedQuantityTabs">
           <property name="currentIndex">
-           <number>0</number>
+           <number>1</number>
           </property>
           <widget class="QWidget" name="advancedSingleTab">
            <attribute name="title">
@@ -782,7 +782,7 @@ QPushButton:hover {
              <number>10</number>
             </property>
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_18">
+             <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="1,1,1,1,1,1">
               <property name="spacing">
                <number>5</number>
               </property>
@@ -790,100 +790,92 @@ QPushButton:hover {
                <number>0</number>
               </property>
               <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="1,1,1,1,1,1">
-                <property name="spacing">
-                 <number>5</number>
+               <widget class="QLabel" name="label_2">
+                <property name="text">
+                 <string>Add to file name:</string>
                 </property>
-                <property name="topMargin">
-                 <number>0</number>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
                 </property>
-                <item>
-                 <widget class="QLabel" name="label_2">
-                  <property name="text">
-                   <string>Add to file name:</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="addTitleButton">
-                  <property name="text">
-                   <string>Title</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="addUploaderButton">
-                  <property name="text">
-                   <string>Uploader</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="addUploadDateButton">
-                  <property name="text">
-                   <string>Upload date</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="addResolutionButton">
-                  <property name="text">
-                   <string>Resolution</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="addExtensionButton">
-                  <property name="text">
-                   <string>Extension</string>
-                  </property>
-                 </widget>
-                </item>
-               </layout>
+               </widget>
               </item>
               <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="1,10,1">
-                <property name="spacing">
-                 <number>0</number>
+               <widget class="QPushButton" name="addTitleButton">
+                <property name="text">
+                 <string>Title</string>
                 </property>
-                <item>
-                 <spacer name="horizontalSpacer_20">
-                  <property name="orientation">
-                   <enum>Qt::Orientation::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>543</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QTextEdit" name="advancedFileNameInput">
-                  <property name="sizePolicy">
-                   <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                    <horstretch>0</horstretch>
-                    <verstretch>0</verstretch>
-                   </sizepolicy>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>21</height>
-                   </size>
-                  </property>
-                  <property name="cursor" stdset="0">
-                   <cursorShape>IBeamCursor</cursorShape>
-                  </property>
-                  <property name="autoFillBackground">
-                   <bool>false</bool>
-                  </property>
-                  <property name="styleSheet">
-                   <string notr="true">QTextEdit {
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="addUploaderButton">
+                <property name="text">
+                 <string>Uploader</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="addUploadDateButton">
+                <property name="text">
+                 <string>Upload date</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="addResolutionButton">
+                <property name="text">
+                 <string>Resolution</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="addExtensionButton">
+                <property name="text">
+                 <string>Extension</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="1,10,1">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <item>
+               <spacer name="horizontalSpacer_20">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>543</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="advancedFileNameInput">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>21</height>
+                 </size>
+                </property>
+                <property name="cursor" stdset="0">
+                 <cursorShape>IBeamCursor</cursorShape>
+                </property>
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QTextEdit {
     background-color: palette(base);
     color: palette(text);
     border: 1px solid palette(mid);
@@ -893,41 +885,39 @@ QPushButton:hover {
 QTextEdit:focus {
     border: 1px solid palette(highlight);
 }</string>
-                  </property>
-                  <property name="inputMethodHints">
-                   <set>Qt::InputMethodHint::ImhNone</set>
-                  </property>
-                  <property name="frameShadow">
-                   <enum>QFrame::Shadow::Sunken</enum>
-                  </property>
-                  <property name="verticalScrollBarPolicy">
-                   <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
-                  </property>
-                  <property name="horizontalScrollBarPolicy">
-                   <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
-                  </property>
-                  <property name="lineWrapMode">
-                   <enum>QTextEdit::LineWrapMode::NoWrap</enum>
-                  </property>
-                  <property name="acceptRichText">
-                   <bool>false</bool>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="horizontalSpacer_21">
-                  <property name="orientation">
-                   <enum>Qt::Orientation::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>543</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-               </layout>
+                </property>
+                <property name="inputMethodHints">
+                 <set>Qt::InputMethodHint::ImhNone</set>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Shadow::Sunken</enum>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="lineWrapMode">
+                 <enum>QTextEdit::LineWrapMode::NoWrap</enum>
+                </property>
+                <property name="acceptRichText">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_21">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>543</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
               </item>
              </layout>
             </item>
@@ -939,7 +929,7 @@ QTextEdit:focus {
            </attribute>
            <layout class="QVBoxLayout" name="verticalLayout_9">
             <property name="spacing">
-             <number>0</number>
+             <number>5</number>
             </property>
             <property name="leftMargin">
              <number>10</number>
@@ -954,7 +944,150 @@ QTextEdit:focus {
              <number>10</number>
             </property>
             <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_14" stretch="1,0,1,1,0,1">
+              <property name="spacing">
+               <number>5</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="label_3">
+                <property name="text">
+                 <string>Add to file name:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="addPlaylistOrderButton">
+                <property name="text">
+                 <string>Playlist Order</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="addPlaylistVideoTitleButton">
+                <property name="text">
+                 <string>Video Title</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="addPlaylistPlaylistTitleButton">
+                <property name="text">
+                 <string>Playlist Title</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="addPlaylistUploaderButton">
+                <property name="text">
+                 <string>Uploader</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="addPlaylistExtensionButton">
+                <property name="text">
+                 <string>Extension</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_13" stretch="1,10,1">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <item>
+               <spacer name="horizontalSpacer_24">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>543</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QTextEdit" name="advancedPlaylistFileNameInput">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>21</height>
+                 </size>
+                </property>
+                <property name="cursor" stdset="0">
+                 <cursorShape>IBeamCursor</cursorShape>
+                </property>
+                <property name="autoFillBackground">
+                 <bool>false</bool>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">QTextEdit {
+    background-color: palette(base);
+    color: palette(text);
+    border: 1px solid palette(mid);
+    border-radius: 3px;
+}
+
+QTextEdit:focus {
+    border: 1px solid palette(highlight);
+}</string>
+                </property>
+                <property name="inputMethodHints">
+                 <set>Qt::InputMethodHint::ImhNone</set>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Shadow::Sunken</enum>
+                </property>
+                <property name="verticalScrollBarPolicy">
+                 <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="horizontalScrollBarPolicy">
+                 <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOff</enum>
+                </property>
+                <property name="lineWrapMode">
+                 <enum>QTextEdit::LineWrapMode::NoWrap</enum>
+                </property>
+                <property name="acceptRichText">
+                 <bool>false</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_25">
+                <property name="orientation">
+                 <enum>Qt::Orientation::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>543</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
              <layout class="QHBoxLayout" name="horizontalLayout_11">
+              <property name="spacing">
+               <number>20</number>
+              </property>
               <item>
                <spacer name="horizontalSpacer_22">
                 <property name="orientation">
@@ -969,9 +1102,16 @@ QTextEdit:focus {
                </spacer>
               </item>
               <item>
-               <widget class="QCheckBox" name="ignoreErrCheckBox_2">
+               <widget class="QCheckBox" name="ignoreAdvancedErrCheckBox">
                 <property name="text">
                  <string>Ignore unsuccessful download (continue downloading)</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="createFolderCheckBox">
+                <property name="text">
+                 <string>Create a folder in destination</string>
                 </property>
                </widget>
               </item>
@@ -1315,7 +1455,7 @@ QTextEdit:focus {
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>652</width>
+     <width>705</width>
      <height>33</height>
     </rect>
    </property>

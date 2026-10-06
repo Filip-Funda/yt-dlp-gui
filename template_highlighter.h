@@ -6,20 +6,20 @@
 #include <QRegularExpression>
 #include <QVector>
 #include <QStyleHints>
+#include <QGuiApplication>
 
 class FilenameHighlighter : public QSyntaxHighlighter {
     Q_OBJECT
 
 public:
-    explicit FilenameHighlighter(QTextDocument * parent = nullptr) : QSyntaxHighlighter(parent) {
+    explicit FilenameHighlighter(QTextDocument * parent = nullptr, bool single = false) : QSyntaxHighlighter(parent) {
 
         updateColors(QGuiApplication::styleHints()->colorScheme());
 
         connect(QGuiApplication::styleHints(), &QStyleHints::colorSchemeChanged,
                 this, &FilenameHighlighter::updateColors);
 
-
-        QStringList keywords = {
+        QStringList singleKeywords = {
             "%(title)s",
             "%(uploader)s",
             "%(upload_date)s",
@@ -27,9 +27,24 @@ public:
             "%(ext)s"
         };
 
-        for (const QString &word : keywords) {
-            QRegularExpression pattern(QRegularExpression::escape(word));
-            highlightingRules.append(pattern);
+        QStringList playlistKeywords = {
+            "%(playlist_index)s",
+            "%(title)s",
+            "%(playlist_title)s",
+            "%(uploader)s",
+            "%(ext)s"
+        };
+
+        if (single) {
+            for (const QString &word : singleKeywords) {
+                QRegularExpression pattern(QRegularExpression::escape(word));
+                highlightingRules.append(pattern);
+            }
+        } else {
+            for (const QString &word : playlistKeywords) {
+                QRegularExpression pattern(QRegularExpression::escape(word));
+                highlightingRules.append(pattern);
+            }
         }
     }
 

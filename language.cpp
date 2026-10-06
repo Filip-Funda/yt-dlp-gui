@@ -31,9 +31,6 @@ void MainGUI::changeEvent(QEvent * event)
 
 void MainGUI::on_enButton_clicked() {
     qApp->removeTranslator(&appTranslator);
-
-    QEvent languageChangeEvent(QEvent::LanguageChange);
-    QGuiApplication::sendEvent(this, &languageChangeEvent);
 }
 
 void MainGUI::on_czButton_clicked() {
