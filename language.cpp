@@ -9,7 +9,7 @@ void MainGUI::changeEvent(QEvent * event)
 
             ui->retranslateUi(this);
 
-            if (ytdlpPath.isEmpty() || ffmpegPath.isEmpty()) {
+            if (ytdlpPath.isEmpty() || ffmpegPath.isEmpty() || jsRuntimePath.isEmpty()) {
                 setLabelColor(ui->status, errorColor);
                 ui->status->setText(tr("Disabled, binaries not found."));
             }

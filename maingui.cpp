@@ -84,7 +84,9 @@ MainGUI::MainGUI(QWidget *parent)
     highlighterPlaylist = new FilenameHighlighter(ui->advancedPlaylistFileNameInput->document(), false);
 
     // automatically detect binaries
-    detectBinaries();
+    detectBinaries(true);
+
+
 }
 
 bool MainGUI::eventFilter(QObject * obj, QEvent * event) {

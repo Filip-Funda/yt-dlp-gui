@@ -9,6 +9,7 @@
 void MainGUI::detectBinaries(bool silent) {
     bool ytdlpFound = false;
     bool ffmpegFound = false;
+    bool jsRuntimeFound = false;
 
     // find needed binaries, disable download if not found
     ytdlpPath = QStandardPaths::findExecutable("yt-dlp");
@@ -51,24 +52,46 @@ void MainGUI::detectBinaries(bool silent) {
     if (jsRuntimePath.isEmpty()) {
         jsRuntimePath = QStandardPaths::findExecutable("deno");
     }
-#if defined(Q_OS_MACOS)
+
     if (jsRuntimePath.isEmpty()) {
-        QStringList extraPaths = {"/opt/homebrew/bin", "/usr/local/bin"};
+        QStringList extraPaths;
+
+#if defined(Q_OS_MACOS)
+        extraPaths << "/opt/homebrew/bin";   // for homebrew downloads (Apple Silicon)
+        extraPaths << "/usr/local/bin";      // for homebrew downloads (Intel) and MacPorts
+#endif
         jsRuntimePath = QStandardPaths::findExecutable("node", extraPaths);
         if (jsRuntimePath.isEmpty()) {
             jsRuntimePath = QStandardPaths::findExecutable("deno", extraPaths);
         }
     }
-#endif
 
-    if (!ffmpegFound || !ytdlpFound) {
+    if (!jsRuntimePath.isEmpty()) {
+        jsRuntimeFound = true;
+    }
+
+    if (!ffmpegFound || !ytdlpFound || !jsRuntimeFound) {
         if (!silent) {
-            if (!ffmpegFound && !ytdlpFound) {
-                QMessageBox::warning(this, tr("Warning"), tr("yt-dlp and ffmpeg not found!"));
-            } else if (!ytdlpFound) {
-                QMessageBox::warning(this, tr("Warning"), tr("yt-dlp not found!"));
-            } else {
-                QMessageBox::warning(this, tr("Warning"), tr("ffmpeg not found!"));
+            QStringList missingBinaries;
+
+            if (!ytdlpFound) {
+                missingBinaries.append(tr("yt-dlp"));
+            }
+
+            if (!ffmpegFound) {
+                missingBinaries.append(tr("ffmpeg"));
+            }
+
+            if (!jsRuntimeFound) {
+                missingBinaries.append(tr("JavaScript runtime"));
+            }
+
+            if (!missingBinaries.isEmpty()) {
+                QString missingList = missingBinaries.join("\n");
+
+                QString warningMessage = tr("Binaries not found:\n%1").arg(missingList);
+
+                QMessageBox::warning(this, tr("Warning"), warningMessage);
             }
         }
 
