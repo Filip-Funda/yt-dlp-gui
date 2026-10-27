@@ -120,13 +120,13 @@
     </message>
     <message>
         <location filename="maingui.ui" line="478"/>
-        <location filename="maingui.ui" line="905"/>
+        <location filename="maingui.ui" line="928"/>
         <source>Playlist</source>
         <translation>Playlist</translation>
     </message>
     <message>
         <location filename="maingui.ui" line="514"/>
-        <location filename="maingui.ui" line="941"/>
+        <location filename="maingui.ui" line="1107"/>
         <source>Ignore unsuccessful download (continue downloading)</source>
         <translation>Ignorovat neúspěšné stažení (pokračovat ve stahování)</translation>
     </message>
@@ -168,157 +168,169 @@
         <translation>Video Kodek:</translation>
     </message>
     <message>
-        <location filename="maingui.ui" line="803"/>
+        <location filename="maingui.ui" line="795"/>
+        <location filename="maingui.ui" line="957"/>
         <source>Add to file name:</source>
         <translation>Přidat k názvu souboru:</translation>
     </message>
     <message>
-        <location filename="maingui.ui" line="813"/>
+        <location filename="maingui.ui" line="805"/>
         <source>Title</source>
         <translation>Titulek</translation>
     </message>
     <message>
-        <location filename="maingui.ui" line="820"/>
+        <location filename="maingui.ui" line="812"/>
+        <location filename="maingui.ui" line="988"/>
         <source>Uploader</source>
         <translation>Autor videa</translation>
     </message>
     <message>
-        <location filename="maingui.ui" line="827"/>
+        <location filename="maingui.ui" line="819"/>
         <source>Upload date</source>
         <translation>Datum nahrání</translation>
     </message>
     <message>
-        <location filename="maingui.ui" line="834"/>
+        <location filename="maingui.ui" line="826"/>
         <source>Resolution</source>
         <translation>Rozlišení</translation>
     </message>
     <message>
-        <location filename="maingui.ui" line="841"/>
+        <location filename="maingui.ui" line="833"/>
+        <location filename="maingui.ui" line="995"/>
         <source>Extension</source>
         <translation>Přípona</translation>
     </message>
     <message>
-        <source>Coming Soon!</source>
-        <translation type="vanished">Již brzy!</translation>
+        <location filename="maingui.ui" line="967"/>
+        <source>Playlist Order</source>
+        <translation>Pořadí v Playlistu</translation>
     </message>
     <message>
-        <location filename="maingui.ui" line="1002"/>
+        <location filename="maingui.ui" line="974"/>
+        <source>Video Title</source>
+        <translation>Název videa</translation>
+    </message>
+    <message>
+        <location filename="maingui.ui" line="981"/>
+        <source>Playlist Title</source>
+        <translation>Název Playlistu</translation>
+    </message>
+    <message>
+        <location filename="maingui.ui" line="1114"/>
+        <source>Create a folder in destination</source>
+        <translation>Vytvořit složku v cílovém umístění</translation>
+    </message>
+    <message>
+        <location filename="maingui.ui" line="1175"/>
         <source>URL:</source>
         <translation>URL:</translation>
     </message>
     <message>
-        <location filename="maingui.ui" line="1021"/>
-        <source>https://youtu.be/1idLDXCwVnE?si=kch01lS2VXGSyvmM</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="maingui.ui" line="1067"/>
+        <location filename="maingui.ui" line="1237"/>
         <source>Select Directory</source>
         <translation>Vybrat adresář</translation>
     </message>
     <message>
-        <location filename="maingui.ui" line="1132"/>
-        <location filename="maingui.cpp" line="171"/>
-        <location filename="maingui.cpp" line="188"/>
+        <location filename="maingui.ui" line="1302"/>
+        <location filename="maingui.cpp" line="221"/>
+        <location filename="maingui.cpp" line="238"/>
         <source>Download</source>
         <translation>Stáhnout</translation>
     </message>
     <message>
-        <location filename="maingui.ui" line="1159"/>
-        <location filename="maingui.cpp" line="116"/>
+        <location filename="maingui.ui" line="1329"/>
+        <location filename="maingui.cpp" line="166"/>
         <source>URL is missing!</source>
         <translation>Chybí URL!</translation>
     </message>
     <message>
-        <location filename="maingui.ui" line="1212"/>
+        <location filename="maingui.ui" line="1382"/>
         <source>Status:</source>
         <translation>Status:</translation>
     </message>
     <message>
-        <location filename="maingui.ui" line="1225"/>
-        <location filename="utils.cpp" line="86"/>
+        <location filename="maingui.ui" line="1395"/>
+        <location filename="utils.cpp" line="109"/>
         <source>Waiting</source>
         <translation>Čekám</translation>
     </message>
     <message>
-        <location filename="maingui.ui" line="1248"/>
+        <location filename="maingui.ui" line="1418"/>
         <source>Detect Binaries</source>
         <translation>Detekovat spustitelné soubory</translation>
     </message>
     <message>
-        <location filename="maingui.cpp" line="93"/>
+        <location filename="maingui.cpp" line="143"/>
         <source>Select destination directory</source>
         <translation>Vybrat cílový adresář</translation>
     </message>
     <message>
-        <location filename="maingui.cpp" line="102"/>
-        <location filename="utils.cpp" line="67"/>
-        <location filename="utils.cpp" line="69"/>
-        <location filename="utils.cpp" line="71"/>
+        <location filename="maingui.cpp" line="152"/>
+        <location filename="utils.cpp" line="94"/>
         <source>Warning</source>
         <translation>Varování</translation>
     </message>
     <message>
-        <location filename="maingui.cpp" line="102"/>
+        <location filename="maingui.cpp" line="152"/>
         <source>Binaries disappeared! Checking again...</source>
         <translation>Spustitelné soubory zmizely! Kontroluji znovu...</translation>
     </message>
     <message>
-        <location filename="maingui.cpp" line="122"/>
+        <location filename="maingui.cpp" line="172"/>
         <source>Invalid URL!</source>
         <translation>Chybné URL!</translation>
     </message>
     <message>
-        <location filename="maingui.cpp" line="129"/>
+        <location filename="maingui.cpp" line="179"/>
         <source>Directory path is missing!</source>
         <translation>Chybí cílový adresář!</translation>
     </message>
     <message>
-        <location filename="maingui.cpp" line="135"/>
+        <location filename="maingui.cpp" line="185"/>
         <source>Cannot write into selected directory!</source>
         <translation>Nemůžu zapisovat do vybraného adresáře!</translation>
     </message>
     <message>
-        <location filename="maingui.cpp" line="160"/>
+        <location filename="maingui.cpp" line="210"/>
         <source>Starting download...</source>
         <translation>Zahajování stahování...</translation>
     </message>
     <message>
-        <location filename="maingui.cpp" line="167"/>
+        <location filename="maingui.cpp" line="217"/>
         <source>Failed to start download!</source>
         <translation>Nepodařilo se zahájit stahování!</translation>
     </message>
     <message>
-        <location filename="maingui.cpp" line="177"/>
-        <location filename="maingui.cpp" line="179"/>
+        <location filename="maingui.cpp" line="227"/>
+        <location filename="maingui.cpp" line="229"/>
         <location filename="language.cpp" line="20"/>
         <source>Downloading...</source>
         <translation>Stahuji...</translation>
     </message>
     <message>
-        <location filename="maingui.cpp" line="193"/>
+        <location filename="maingui.cpp" line="243"/>
         <location filename="language.cpp" line="17"/>
         <source>Download finished!</source>
         <translation>Stahování dokončeno!</translation>
     </message>
     <message>
-        <location filename="maingui.cpp" line="196"/>
+        <location filename="maingui.cpp" line="246"/>
         <location filename="language.cpp" line="24"/>
         <source>Error, download failed!</source>
         <translation>Chyba, stahování selhalo!</translation>
     </message>
     <message>
-        <location filename="maingui.cpp" line="200"/>
+        <location filename="maingui.cpp" line="250"/>
         <source>Unknown error (exit code: %1)</source>
         <translation>Neznámá chyba (stav ukončení: %1)</translation>
     </message>
     <message>
-        <location filename="maingui.cpp" line="203"/>
+        <location filename="maingui.cpp" line="253"/>
         <source>Download Failed</source>
         <translation>Stahování selhalo</translation>
     </message>
     <message>
-        <location filename="maingui.cpp" line="204"/>
+        <location filename="maingui.cpp" line="254"/>
         <source>The download process failed.
 
 Error details:
@@ -329,22 +341,29 @@ Detaily chyby:
 %1</translation>
     </message>
     <message>
-        <location filename="utils.cpp" line="67"/>
-        <source>yt-dlp and ffmpeg not found!</source>
-        <translation>yt-dlp a ffmpeg nenalezeno!</translation>
-    </message>
-    <message>
-        <location filename="utils.cpp" line="69"/>
-        <source>yt-dlp not found!</source>
-        <translation>yt-dlp nenalezeno!</translation>
-    </message>
-    <message>
-        <location filename="utils.cpp" line="71"/>
-        <source>ffmpeg not found!</source>
-        <translation>ffmpeg nenalezeno!</translation>
-    </message>
-    <message>
         <location filename="utils.cpp" line="78"/>
+        <source>yt-dlp</source>
+        <translation>yt-dlp</translation>
+    </message>
+    <message>
+        <location filename="utils.cpp" line="82"/>
+        <source>ffmpeg</source>
+        <translation>ffmpeg</translation>
+    </message>
+    <message>
+        <location filename="utils.cpp" line="86"/>
+        <source>JavaScript runtime</source>
+        <translation>Běhové prostředí JavaScriptu</translation>
+    </message>
+    <message>
+        <location filename="utils.cpp" line="92"/>
+        <source>Binaries not found:
+%1</source>
+        <translation>Spustitelné soubory nenalezeny:
+%1</translation>
+    </message>
+    <message>
+        <location filename="utils.cpp" line="101"/>
         <location filename="language.cpp" line="14"/>
         <source>Disabled, binaries not found.</source>
         <oldsource>Disabled, binaries not found. If installed, restart the app.</oldsource>

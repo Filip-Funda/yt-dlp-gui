@@ -1190,9 +1190,6 @@ QTextEdit:focus {
           <height>0</height>
          </size>
         </property>
-        <property name="text">
-         <string>https://youtu.be/1idLDXCwVnE?si=kch01lS2VXGSyvmM</string>
-        </property>
         <property name="maxLength">
          <number>256</number>
         </property>
