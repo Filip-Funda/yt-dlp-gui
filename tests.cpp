@@ -78,6 +78,56 @@ private slots:
         QCOMPARE(label1.palette().color(QPalette::WindowText), color1);
         QCOMPARE(label2.palette().color(QPalette::WindowText), color2);
     }
+
+    void testAdvancedPlaylistArguments() {
+        MainGUI gui;
+        gui.args.clear();
+
+        gui.ui->settingsTab->setCurrentIndex(1);
+        gui.ui->advancedQuantityTabs->setCurrentIndex(1);
+
+        gui.ui->createFolderCheckBox->setChecked(true);
+        gui.ui->ignoreAdvancedErrCheckBox->setChecked(true);
+
+        gui.addArguments("https://youtube.com/playlist?list=123", "/downloads");
+
+        QVERIFY(gui.args.contains("--yes-playlist"));
+        QVERIFY(gui.args.contains("-i"));
+        QVERIFY(gui.args.contains("-o"));
+        QVERIFY(gui.args.contains("%(playlist)s/%(title)s.%(ext)s"));
+    }
+
+    void testFilenameSanitizationEdgeCases() {
+        QCOMPARE(MainGUI::sanitizeFilename("?<>:\"|?*"), QString("file"));
+        QCOMPARE(MainGUI::sanitizeFilename("   "), QString("file"));
+
+        QCOMPARE(MainGUI::sanitizeFilename("---bad-option.mp4"), QString("bad-option.mp4"));
+    }
+
+    void testUrlSchemes() {
+        QVERIFY(MainGUI::isValidUrl("ftp://example.com/file.mp4") == false);
+        QVERIFY(MainGUI::isValidUrl("file:///etc/passwd") == false);
+        QVERIFY(MainGUI::isValidUrl("javascript:alert(1)") == false);
+    }
+
+    void testAdvancedMediaInfoExtraction() {
+        MainGUI gui;
+
+        gui.ui->settingsTab->setCurrentIndex(1);
+        gui.ui->advancedFormatTabs->setCurrentIndex(1);
+
+        gui.ui->videoVideoCodecDropdown->clear();
+        gui.ui->videoVideoCodecDropdown->addItem("avc1 (H.264)");
+        gui.ui->videoVideoCodecDropdown->setCurrentIndex(0);
+
+        QStringList mediaInfo = gui.getAdvancedMediaInfo();
+
+        if (!mediaInfo.isEmpty() && mediaInfo.size() >= 3) {
+            QCOMPARE(mediaInfo[2], QString("avc1"));
+        } else {
+            QFAIL("Advanced media info list is invalid or empty.");
+        }
+    }
 };
 
 QTEST_MAIN(AppTests)

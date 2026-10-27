@@ -221,10 +221,8 @@ void MainGUI::addArguments(const QString & url, const QString & directoryPath) {
 
             // disable path traversal and regex, protection against file rewrite
             QString cleanFileName = sanitizeFilename(fileName);
+            args << "-o" << cleanFileName;
 
-            if (!cleanFileName.isEmpty()) {
-                args << "-o" << cleanFileName;
-            }
         } else {
             // PLAYLIST download is selected
             if (ui->ignoreErrCheckBox->isChecked()) {
@@ -262,10 +260,7 @@ void MainGUI::addArguments(const QString & url, const QString & directoryPath) {
             // SINGLE download is selected
             QString advancedFileName = ui->advancedFileNameInput->toPlainText();
             QString cleanFileName = sanitizeFilename(advancedFileName);
-
-            if (!cleanFileName.isEmpty()) {
-                args << "-o" << cleanFileName;
-            }
+            args << "-o" << cleanFileName;
 
         } else {
             // PLAYLIST download is selected
@@ -273,30 +268,23 @@ void MainGUI::addArguments(const QString & url, const QString & directoryPath) {
             QString advancedFileName = ui->advancedPlaylistFileNameInput->toPlainText();
             QString cleanFileName = sanitizeFilename(advancedFileName);
 
-
             if (ui->ignoreAdvancedErrCheckBox->isChecked()) {
-                // ignore error if one video from playlist cannot be downloaded
                 args << "-i";
             }
 
             if (ui->createFolderCheckBox->isChecked()) {
-                // create a folder in destination and move in all downloaded media
-                // add %(playlist)s/ to the beginning to create a folder
-
-                if (cleanFileName.isEmpty()) {
+                if (advancedFileName.isEmpty()) {
                     cleanFileName = "%(playlist)s/%(title)s.%(ext)s";
                 } else {
                     cleanFileName = "%(playlist)s/" + cleanFileName;
                 }
-
-            } else if (cleanFileName.isEmpty()) {
+            } else if (advancedFileName.isEmpty()) {
                 cleanFileName = "%(title)s.%(ext)s";
             }
 
             if (!cleanFileName.isEmpty()) {
                 args << "-o" << cleanFileName;
             }
-
 
             args << "--yes-playlist";
         }
