@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(yt-dlp-gui VERSION 0.3.0 LANGUAGES CXX)
+project(yt-dlp-gui VERSION 0.3.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -29,8 +29,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         utils.cpp
         language.cpp
         template_highlighter.h
-        globals.h
-        globals.cpp
+        constants.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET yt-dlp-gui APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

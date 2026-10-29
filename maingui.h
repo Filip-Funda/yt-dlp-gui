@@ -75,15 +75,23 @@ private:
     QString jsRuntimePath;
     QStringList args;
 
-    static constexpr const char * RATE_LIMIT = "3M";
-    static constexpr int SLEEP_MIN = 3;
-    static constexpr int SLEEP_MAX = 10;
-
     QColor errorColor;
     QColor downloadColor;
     QColor finishedColor;
 
     static const QRegularExpression progressRegex;
+
+    enum class StatusState {
+        Waiting,
+        BinariesNotFound,
+        Starting,
+        Downloading,
+        FailedToStart,
+        Finished,
+        DownloadError
+    };
+
+    StatusState currentStatusState = StatusState::Waiting;
 
     void detectBinaries(bool silent = true);
 

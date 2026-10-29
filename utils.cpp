@@ -1,5 +1,6 @@
 #include "maingui.h"
 #include "./ui_maingui.h"
+#include "constants.h"
 #include <QStandardPaths>
 #include <QMessageBox>
 #include <QRegularExpression>
@@ -97,6 +98,7 @@ void MainGUI::detectBinaries(bool silent) {
 
         ui->downloadButton->setEnabled(false);
 
+        currentStatusState = StatusState::BinariesNotFound;
         setLabelColor(ui->status, errorColor);
         ui->status->setText(tr("Disabled, binaries not found."));
 
@@ -105,6 +107,7 @@ void MainGUI::detectBinaries(bool silent) {
     } else {
         ui->downloadButton->setEnabled(true);
 
+        currentStatusState = StatusState::Waiting;
         ui->status->setPalette(QPalette());
         ui->status->setText(tr("Waiting"));
 
@@ -177,9 +180,9 @@ void MainGUI::addArguments(const QString & url, const QString & directoryPath) {
         << "--embed-thumbnail";
 
     args // ----- IP BLOCK AVOIDANCE -----
-        << "--limit-rate" << RATE_LIMIT
-        << "--sleep-interval" << QString::number(SLEEP_MIN)
-        << "--max-sleep-interval" << QString::number(SLEEP_MAX);
+        << "--limit-rate" << Constants::RATE_LIMIT
+        << "--sleep-interval" << QString::number(Constants::SLEEP_MIN)
+        << "--max-sleep-interval" << QString::number(Constants::SLEEP_MAX);
 
     args // ----- PATHS -----
         << "--ffmpeg-location" << ffmpegPath

@@ -206,6 +206,7 @@ void MainGUI::on_downloadButton_clicked() {
     args.clear();
     addArguments(url, directoryPath);
 
+    currentStatusState = StatusState::Starting;
     setLabelColor(ui->status, downloadColor);
     ui->status->setText(tr("Starting download..."));
 
@@ -214,6 +215,7 @@ void MainGUI::on_downloadButton_clicked() {
     if (!process->waitForStarted(3000)) {
         setLabelColor(ui->status, errorColor);
 
+        currentStatusState = StatusState::FailedToStart;
         ui->status->setText(tr("Failed to start download!"));
         ui->downloadButton->setEnabled(true);
         //ui->downloadButton->setCursor(Qt::PointingHandCursor);
@@ -224,6 +226,7 @@ void MainGUI::on_downloadButton_clicked() {
         return;
     }
 
+    currentStatusState = StatusState::Downloading;
     ui->status->setText(tr("Downloading..."));
     setButtonsEnabled(false);
     ui->downloadButton->setText(tr("Downloading..."));
@@ -239,9 +242,11 @@ void MainGUI::onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus) {
 
     // set status according to exit code
     if (exitStatus == QProcess::NormalExit && exitCode == 0) {
+        currentStatusState = StatusState::Finished;
         setLabelColor(ui->status, finishedColor);
         ui->status->setText(tr("Download finished!"));
     } else {
+        currentStatusState = StatusState::DownloadError;
         setLabelColor(ui->status, errorColor);
         ui->status->setText(tr("Error, download failed!"));
 

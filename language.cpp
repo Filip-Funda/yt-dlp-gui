@@ -5,23 +5,39 @@ void MainGUI::changeEvent(QEvent * event)
 {
     if (event->type() == QEvent::LanguageChange) {
         if (ui && ui->status) {
-            QColor currentColor = ui->status->palette().color(QPalette::WindowText);
-
             ui->retranslateUi(this);
 
-            if (ytdlpPath.isEmpty() || ffmpegPath.isEmpty() || jsRuntimePath.isEmpty()) {
-                setLabelColor(ui->status, errorColor);
-                ui->status->setText(tr("Disabled, binaries not found."));
-            }
-            else if (currentColor == finishedColor) {
-                ui->status->setText(tr("Download finished!"));
-            }
-            else if (process && process->state() == QProcess::Running) {
-                ui->status->setText(tr("Downloading..."));
-            }
-            else if (currentColor == errorColor) {
-                setLabelColor(ui->status, errorColor);
-                ui->status->setText(tr("Error, download failed!"));
+            switch (currentStatusState) {
+                case StatusState::Waiting:
+                    ui->status->setPalette(QPalette());
+                    ui->status->setText(tr("Waiting"));
+                    break;
+                case StatusState::BinariesNotFound:
+                    setLabelColor(ui->status, errorColor);
+                    ui->status->setText(tr("Disabled, binaries not found."));
+                    break;
+                case StatusState::Starting:
+                    setLabelColor(ui->status, downloadColor);
+                    ui->status->setText(tr("Starting download..."));
+                    break;
+                case StatusState::Downloading:
+                    setLabelColor(ui->status, downloadColor);
+                    ui->status->setText(tr("Downloading..."));
+                    break;
+                case StatusState::FailedToStart:
+                    setLabelColor(ui->status, errorColor);
+                    ui->status->setText(tr("Failed to start download!"));
+                    break;
+                case StatusState::Finished:
+                    setLabelColor(ui->status, finishedColor);
+                    ui->status->setText(tr("Download finished!"));
+                    break;
+                case StatusState::DownloadError:
+                    setLabelColor(ui->status, errorColor);
+                    ui->status->setText(tr("Error, download failed!"));
+                    break;
+                default:
+                    break;
             }
         }
     }
