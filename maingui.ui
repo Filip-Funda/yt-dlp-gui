@@ -1038,8 +1038,8 @@ QTextEdit:focus {
                 </property>
                 <property name="styleSheet">
                  <string notr="true">QTextEdit {
-    background-color: palette(base);
-    color: palette(text);
+    /*background-color: palette(base);
+    color: palette(text);*/
     border: 1px solid palette(mid);
     border-radius: 3px;
 }

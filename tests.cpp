@@ -79,6 +79,20 @@ private slots:
         QCOMPARE(label2.palette().color(QPalette::WindowText), color2);
     }
 
+    void testSetLabelColorError() {
+        MainGUI gui;
+
+        gui.setLabelColor(nullptr, QColor(255, 0, 0));
+
+        QLabel label;
+        QColor originalColor = label.palette().color(QPalette::WindowText);
+        QColor invalidColor;
+
+        gui.setLabelColor(&label, invalidColor);
+
+        QVERIFY(true);
+    }
+
     void testAdvancedPlaylistArguments() {
         MainGUI gui;
         gui.args.clear();

@@ -1,12 +1,13 @@
 #ifndef MAINGUI_H
 #define MAINGUI_H
 
+#include "template_highlighter.h"
 #include <QMainWindow>
 #include <QProcess>
 #include <QtWidgets/qlabel.h>
 #include <QTranslator>
 #include <QEvent>
-#include "template_highlighter.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -110,7 +111,7 @@ private:
 
     void addArguments(const QString & url, const QString & directoryPath);
 
-    void setLabelColor(QLabel * label, QColor color);
+    void setLabelColor(QLabel * label, const QColor & color);
 
     void updateUIColors(bool isDark);
 
