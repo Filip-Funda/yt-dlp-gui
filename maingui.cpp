@@ -1,5 +1,6 @@
 #include "maingui.h"
 #include "./ui_maingui.h"
+#include "constants.h"
 #include <QFileDialog>
 #include <QDir>
 #include <QProcess>
@@ -206,16 +207,18 @@ void MainGUI::on_downloadButton_clicked() {
     args.clear();
     addArguments(url, directoryPath);
 
-    currentStatusState = StatusState::Starting;
     setLabelColor(ui->status, downloadColor);
+    currentStatusColor = StatusColor::Yellow;
+    currentStatusState = StatusState::Starting;
     ui->status->setText(tr("Starting download..."));
 
     process->start(ytdlpPath, args);
 
     if (!process->waitForStarted(3000)) {
         setLabelColor(ui->status, errorColor);
-
+        currentStatusColor = StatusColor::Red;
         currentStatusState = StatusState::FailedToStart;
+
         ui->status->setText(tr("Failed to start download!"));
         ui->downloadButton->setEnabled(true);
         //ui->downloadButton->setCursor(Qt::PointingHandCursor);
@@ -242,12 +245,14 @@ void MainGUI::onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus) {
 
     // set status according to exit code
     if (exitStatus == QProcess::NormalExit && exitCode == 0) {
-        currentStatusState = StatusState::Finished;
         setLabelColor(ui->status, finishedColor);
+        currentStatusColor = StatusColor::Green;
+        currentStatusState = StatusState::Finished;
         ui->status->setText(tr("Download finished!"));
     } else {
-        currentStatusState = StatusState::DownloadError;
         setLabelColor(ui->status, errorColor);
+        currentStatusColor = StatusColor::Red;
+        currentStatusState = StatusState::DownloadError;
         ui->status->setText(tr("Error, download failed!"));
 
         QString errorOutput = process->readAllStandardError();
@@ -288,33 +293,46 @@ void MainGUI::setLabelColor(QLabel * label, QColor color) {
 
 void MainGUI::updateUIColors(bool isDark) {
     if (isDark) {
-        errorColor = QColor(255, 100, 100);
-        downloadColor = QColor(255, 214, 102);
-        finishedColor = QColor(144, 238, 144);
-
-        if (ui->status->palette().color(QPalette::WindowText) == QColor(200, 0, 0)) {
-            setLabelColor(ui->status, errorColor);
-        } else if (ui->status->palette().color(QPalette::WindowText) == QColor(184, 134, 11)) {
-            setLabelColor(ui->status, downloadColor);
-        } else if (ui->status->palette().color(QPalette::WindowText) == QColor(34, 139, 34)) {
-            setLabelColor(ui->status, finishedColor);
+        switch (currentStatusColor) {
+            case StatusColor::Red:
+                setLabelColor(ui->status, Constants::DARK_ERROR_COLOR);
+                break;
+            case StatusColor::Yellow:
+                setLabelColor(ui->status, Constants::DARK_DOWNLOAD_COLOR);
+                break;
+            case StatusColor::Green:
+                setLabelColor(ui->status, Constants::DARK_FINISHED_COLOR);
+                break;
+            default:
+                break;
         }
 
+        setLabelColor(ui->errorLabel, Constants::DARK_ERROR_COLOR);
+
+        errorColor = Constants::DARK_ERROR_COLOR;
+        downloadColor = Constants::DARK_DOWNLOAD_COLOR;
+        finishedColor = Constants::DARK_FINISHED_COLOR;
     } else {
-        errorColor = QColor(200, 0, 0);
-        downloadColor = QColor(184, 134, 11);
-        finishedColor =  QColor(34, 139, 34);
-
-        if (ui->status->palette().color(QPalette::WindowText) == QColor(255, 100, 100)) {
-            setLabelColor(ui->status, errorColor);
-        } else if (ui->status->palette().color(QPalette::WindowText) == QColor(255, 214, 102)) {
-            setLabelColor(ui->status, downloadColor);
-        } else if (ui->status->palette().color(QPalette::WindowText) == QColor(144, 238, 144)) {
-            setLabelColor(ui->status, finishedColor);
+        switch (currentStatusColor) {
+            case StatusColor::Red:
+                setLabelColor(ui->status, Constants::LIGHT_ERROR_COLOR);
+                break;
+            case StatusColor::Yellow:
+                setLabelColor(ui->status, Constants::LIGHT_DOWNLOAD_COLOR);
+                break;
+            case StatusColor::Green:
+                setLabelColor(ui->status, Constants::LIGHT_FINISHED_COLOR);
+                break;
+            default:
+                break;
         }
-    }
 
-    setLabelColor(ui->errorLabel, errorColor);
+        setLabelColor(ui->errorLabel, Constants::LIGHT_ERROR_COLOR);
+
+        errorColor = Constants::LIGHT_ERROR_COLOR;
+        downloadColor = Constants::LIGHT_DOWNLOAD_COLOR;
+        finishedColor =  Constants::LIGHT_FINISHED_COLOR;
+    }
 }
 
 void MainGUI::setButtonsEnabled(bool enabled) {

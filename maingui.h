@@ -93,6 +93,15 @@ private:
 
     StatusState currentStatusState = StatusState::Waiting;
 
+    enum class StatusColor {
+        Red,
+        Yellow,
+        Green,
+        White
+    };
+
+    StatusColor currentStatusColor = StatusColor::White;
+
     void detectBinaries(bool silent = true);
 
     QString getSelectedFormat() const;
