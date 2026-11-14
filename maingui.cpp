@@ -345,6 +345,7 @@ void MainGUI::setButtonsEnabled(bool enabled) {
     //ui->directoryButton->setCursor(enabled ? Qt::PointingHandCursor : Qt::ArrowCursor);
 }
 
+// will change in next release
 void MainGUI::showAvailableCodecs() {
     // ADVANCED tab has to be selected
     if (ui->settingsTab->currentIndex() == 1) {
@@ -398,7 +399,7 @@ void MainGUI::showAvailableCodecs() {
 
 void MainGUI::on_addTitleButton_clicked() {
     if (ui->advancedFileNameInput->toPlainText().length() < 247) {
-        ui->advancedFileNameInput->insertPlainText("%(title)s");
+        ui->advancedFileNameInput->insertPlainText(Constants::TITLE_TEMPLATE);
         ui->advancedFileNameInput->setFocus();
     }
 }
@@ -406,7 +407,7 @@ void MainGUI::on_addTitleButton_clicked() {
 
 void MainGUI::on_addUploaderButton_clicked() {
     if (ui->advancedFileNameInput->toPlainText().length() < 244) {
-        ui->advancedFileNameInput->insertPlainText("%(uploader)s");
+        ui->advancedFileNameInput->insertPlainText(Constants::UPLOADER_TEMPLATE);
         ui->advancedFileNameInput->setFocus();
     }
 }
@@ -414,7 +415,7 @@ void MainGUI::on_addUploaderButton_clicked() {
 
 void MainGUI::on_addUploadDateButton_clicked() {
     if (ui->advancedFileNameInput->toPlainText().length() < 241) {
-        ui->advancedFileNameInput->insertPlainText("%(upload_date)s");
+        ui->advancedFileNameInput->insertPlainText(Constants::UPLOAD_DATE_TEMPLATE);
         ui->advancedFileNameInput->setFocus();
     }
 }
@@ -422,7 +423,7 @@ void MainGUI::on_addUploadDateButton_clicked() {
 
 void MainGUI::on_addResolutionButton_clicked() {
     if (ui->advancedFileNameInput->toPlainText().length() < 242) {
-        ui->advancedFileNameInput->insertPlainText("%(resolution)s");
+        ui->advancedFileNameInput->insertPlainText(Constants::RESOLUTION_TEMPLATE);
         ui->advancedFileNameInput->setFocus();
     }
 }
@@ -430,14 +431,14 @@ void MainGUI::on_addResolutionButton_clicked() {
 
 void MainGUI::on_addExtensionButton_clicked() {
     if (ui->advancedFileNameInput->toPlainText().length() < 249) {
-        ui->advancedFileNameInput->insertPlainText("%(ext)s");
+        ui->advancedFileNameInput->insertPlainText(Constants::EXTENSION_TEMPLATE);
         ui->advancedFileNameInput->setFocus();
     }
 }
 
 void MainGUI::on_addPlaylistOrderButton_clicked() {
     if (ui->advancedPlaylistFileNameInput->toPlainText().length() < 238) {
-        ui->advancedPlaylistFileNameInput->insertPlainText("%(playlist_index)s");
+        ui->advancedPlaylistFileNameInput->insertPlainText(Constants::PLAYLIST_ORDER_TEMPLATE);
         ui->advancedPlaylistFileNameInput->setFocus();
     }
 }
@@ -445,7 +446,7 @@ void MainGUI::on_addPlaylistOrderButton_clicked() {
 
 void MainGUI::on_addPlaylistVideoTitleButton_clicked() {
     if (ui->advancedPlaylistFileNameInput->toPlainText().length() < 247) {
-        ui->advancedPlaylistFileNameInput->insertPlainText("%(title)s");
+        ui->advancedPlaylistFileNameInput->insertPlainText(Constants::TITLE_TEMPLATE);
         ui->advancedPlaylistFileNameInput->setFocus();
     }
 }
@@ -453,7 +454,7 @@ void MainGUI::on_addPlaylistVideoTitleButton_clicked() {
 
 void MainGUI::on_addPlaylistPlaylistTitleButton_clicked() {
     if (ui->advancedPlaylistFileNameInput->toPlainText().length() < 238) {
-        ui->advancedPlaylistFileNameInput->insertPlainText("%(playlist_title)s");
+        ui->advancedPlaylistFileNameInput->insertPlainText(Constants::PLAYLIST_TITLE_TEMPLATE);
         ui->advancedPlaylistFileNameInput->setFocus();
     }
 }
@@ -461,7 +462,7 @@ void MainGUI::on_addPlaylistPlaylistTitleButton_clicked() {
 
 void MainGUI::on_addPlaylistUploaderButton_clicked() {
     if (ui->advancedPlaylistFileNameInput->toPlainText().length() < 244) {
-        ui->advancedPlaylistFileNameInput->insertPlainText("%(uploader)s");
+        ui->advancedPlaylistFileNameInput->insertPlainText(Constants::UPLOADER_TEMPLATE);
         ui->advancedPlaylistFileNameInput->setFocus();
     }
 }
@@ -469,7 +470,7 @@ void MainGUI::on_addPlaylistUploaderButton_clicked() {
 
 void MainGUI::on_addPlaylistExtensionButton_clicked() {
     if (ui->advancedPlaylistFileNameInput->toPlainText().length() < 249) {
-        ui->advancedPlaylistFileNameInput->insertPlainText("%(ext)s");
+        ui->advancedPlaylistFileNameInput->insertPlainText(Constants::EXTENSION_TEMPLATE);
         ui->advancedPlaylistFileNameInput->setFocus();
     }
 }
